@@ -1,12 +1,88 @@
 package com.betrybe.sociallogin
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
 
 class MainActivity : AppCompatActivity() {
+
+    private val inputEmail: TextInputEditText by lazy { findViewById(R.id.email_input_layout) }
+    private val inputPassword: TextInputEditText by lazy {
+        findViewById(R.id.password_input_layout)
+    }
+    private val btnLogin: Button by lazy { findViewById(R.id.login_button) }
+    private val txWrongEmail: TextView by lazy { findViewById(R.id.tx_wrong_email) }
+    private val txWrongPassword: TextView by lazy { findViewById(R.id.tx_wrong_password) }
+
+    private val EMAIL_REGEX = "^[A-Za-z0-9.]+@[A-Za-z]+\\.[A-Za-z]+$".toRegex()
+    private val CONTEXT_VIEW: ConstraintLayout by lazy { findViewById(R.id.main) }
+    private val MAX_PASSWORD_LENGTH = 4
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        inputEmail.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun afterTextChanged(p0: Editable?) {
+                updateButtonState()
+            }
+        })
+
+        inputPassword.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun afterTextChanged(p0: Editable?) {
+                updateButtonState()
+            }
+        })
+
+        btnLogin.setOnClickListener {
+            if (!checkEmail(inputEmail.text.toString())) {
+                txWrongEmail.visibility = TextView.VISIBLE
+            } else {
+                txWrongEmail.visibility = TextView.GONE
+            }
+
+            if (!checkPassword(inputPassword.text.toString())) {
+                txWrongPassword.visibility = TextView.VISIBLE
+            } else {
+                txWrongPassword.visibility = TextView.GONE
+            }
+
+            if (checkEmail(inputEmail.text.toString()) &&
+                checkPassword(inputPassword.text.toString())
+            ) {
+                Snackbar.make(CONTEXT_VIEW, R.string.login_succeeded, Snackbar.LENGTH_SHORT)
+                    .show()
+            }
+        }
+    }
+
+    private fun updateButtonState() {
+        val emailLength = inputEmail.text.toString().length
+        var passwordLength = inputPassword.text.toString().length
+
+        btnLogin.isEnabled = emailLength > 0 && passwordLength > 0
+        btnLogin.isClickable = emailLength > 0 && passwordLength > 0
+    }
+
+    private fun checkEmail(email: String): Boolean {
+        return email.matches(EMAIL_REGEX)
+    }
+
+    private fun checkPassword(password: String): Boolean {
+        return password.length > MAX_PASSWORD_LENGTH
     }
 }

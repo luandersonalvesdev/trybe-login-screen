@@ -40,11 +40,21 @@
             app:startIconDrawable="@drawable/email_icon_24dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tx_wrong_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_weight="1"
+            android:text="@string/email_warning"
+            android:visibility="gone" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/password_text_input_layout"
@@ -52,24 +62,36 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:hint="@string/password"
+            app:endIconMode="password_toggle"
             app:startIconContentDescription="password icon"
-            app:startIconDrawable="@drawable/password_icon_24dp"
-            app:endIconMode="password_toggle">
+            app:startIconDrawable="@drawable/password_icon_24dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tx_wrong_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_weight="1"
+            android:text="@string/password_warning"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/login_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
+            android:clickable="false"
+            android:contextClickable="false"
             android:enabled="false"
-            android:text="@string/login"/>
+            android:text="@string/login" />
 
         <Button
             style="@style/Widget.Material3.Button.TextButton"
