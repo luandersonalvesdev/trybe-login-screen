@@ -20,18 +20,25 @@ class MainActivity : AppCompatActivity() {
     private val txWrongEmail: TextView by lazy { findViewById(R.id.tx_wrong_email) }
     private val txWrongPassword: TextView by lazy { findViewById(R.id.tx_wrong_password) }
 
-    private val EMAIL_REGEX = "^[A-Za-z0-9.]+@[A-Za-z]+\\.[A-Za-z]+$".toRegex()
-    private val CONTEXT_VIEW: ConstraintLayout by lazy { findViewById(R.id.main) }
-    private val MAX_PASSWORD_LENGTH = 4
+    private val emailRegex = "^[A-Za-z0-9.]+@[A-Za-z]+\\.[A-Za-z]+$".toRegex()
+    private val contextView: ConstraintLayout by lazy { findViewById(R.id.main) }
+
+    companion object {
+        const val MAX_PASSWORD_LENGTH = 4
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         inputEmail.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                TODO("Not yet implemented")
+            }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                TODO("Not yet implemented")
+            }
 
             override fun afterTextChanged(p0: Editable?) {
                 updateButtonState()
@@ -39,9 +46,13 @@ class MainActivity : AppCompatActivity() {
         })
 
         inputPassword.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                TODO("Not yet implemented")
+            }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                TODO("Not yet implemented")
+            }
 
             override fun afterTextChanged(p0: Editable?) {
                 updateButtonState()
@@ -64,7 +75,7 @@ class MainActivity : AppCompatActivity() {
             if (checkEmail(inputEmail.text.toString()) &&
                 checkPassword(inputPassword.text.toString())
             ) {
-                Snackbar.make(CONTEXT_VIEW, R.string.login_succeeded, Snackbar.LENGTH_SHORT)
+                Snackbar.make(contextView, R.string.login_succeeded, Snackbar.LENGTH_SHORT)
                     .show()
             }
         }
@@ -79,7 +90,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkEmail(email: String): Boolean {
-        return email.matches(EMAIL_REGEX)
+        return email.matches(emailRegex)
     }
 
     private fun checkPassword(password: String): Boolean {
