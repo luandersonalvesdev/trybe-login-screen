@@ -3,6 +3,7 @@ package com.betrybe.sociallogin
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -33,11 +34,11 @@ class MainActivity : AppCompatActivity() {
 
         inputEmail.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                TODO("Not yet implemented")
+                updateButtonState()
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                TODO("Not yet implemented")
+                updateButtonState()
             }
 
             override fun afterTextChanged(p0: Editable?) {
@@ -47,11 +48,11 @@ class MainActivity : AppCompatActivity() {
 
         inputPassword.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                TODO("Not yet implemented")
+                updateButtonState()
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                TODO("Not yet implemented")
+                updateButtonState()
             }
 
             override fun afterTextChanged(p0: Editable?) {
@@ -61,15 +62,15 @@ class MainActivity : AppCompatActivity() {
 
         btnLogin.setOnClickListener {
             if (!checkEmail(inputEmail.text.toString())) {
-                txWrongEmail.visibility = TextView.VISIBLE
+                changeVisibility(txWrongEmail, true)
             } else {
-                txWrongEmail.visibility = TextView.GONE
+                changeVisibility(txWrongEmail, false)
             }
 
             if (!checkPassword(inputPassword.text.toString())) {
-                txWrongPassword.visibility = TextView.VISIBLE
+                changeVisibility(txWrongPassword, true)
             } else {
-                txWrongPassword.visibility = TextView.GONE
+                changeVisibility(txWrongPassword, false)
             }
 
             if (checkEmail(inputEmail.text.toString()) &&
@@ -95,5 +96,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkPassword(password: String): Boolean {
         return password.length > MAX_PASSWORD_LENGTH
+    }
+
+    private fun changeVisibility(v: View, visibility: Boolean) {
+        if (visibility) {
+            v.visibility = View.VISIBLE
+        } else {
+            v.visibility = View.GONE
+        }
     }
 }

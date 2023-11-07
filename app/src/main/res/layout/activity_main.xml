@@ -35,7 +35,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            android:hint="@string/email"
             app:startIconContentDescription="email icon"
             app:startIconDrawable="@drawable/email_icon_24dp">
 
@@ -43,25 +42,24 @@
                 android:id="@+id/email_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/email"
                 android:inputType="textEmailAddress" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/tx_wrong_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/email_warning"
+                android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/tx_wrong_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:layout_weight="1"
-            android:text="@string/email_warning"
-            android:visibility="gone" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/password_text_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            android:hint="@string/password"
             app:endIconMode="password_toggle"
             app:startIconContentDescription="password icon"
             app:startIconDrawable="@drawable/password_icon_24dp">
@@ -70,18 +68,18 @@
                 android:id="@+id/password_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/password"
                 android:inputType="textPassword" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/tx_wrong_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/password_warning"
+                android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/tx_wrong_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:layout_weight="1"
-            android:text="@string/password_warning"
-            android:visibility="gone" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/login_button"
